@@ -5,6 +5,12 @@ function UserTable(props){
 
     // props.users.filter();
 
+    const filterBySearch = (user)=>{
+        const fullName = `${user.name.first} ${user.name.last}`;
+            
+            return !props.search || fullName.toLowerCase().includes(props.search.toLowerCase()) ;
+    }
+
     return(
         <Table striped bordered hover>
             <thead>
@@ -17,7 +23,7 @@ function UserTable(props){
                 </tr>
             </thead>
             <tbody>
-                {props.users.map(user =>{
+                {props.users.filter(filterBySearch).map(user =>{
                     return (
                         <tr key={user.id.value}>
                             <td>{user.name.first}</td>
